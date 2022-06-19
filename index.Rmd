@@ -10,15 +10,15 @@ output:
 ### GF-0604 Procesamiento de datos geográficos
 ### Profesor: Manuel Vargas del Valle
 # Introducción:
-### Este informe tiene como finalidad demostrar la utilidad de utilizar datos
-### y realizar diferentes estadísticos con ellos como **gráficos** con el   paquete DT de R.
+#### Este informe tiene como finalidad demostrar la utilidad de utilizar datos
+#### y realizar diferentes estadísticos con ellos como **tablas** y **gráficos** con diferentes paquetes de R. Estos paquetes se encuentran especificados en la sección de carga de paquetes y lectura de datos. Además, es importante señalar que este página web cuenta con una serie de _botones_ "code", que permiten al lector observar el código utilizado para generar cada uno de los productos.
 
-### Desarrollo:
-```{r setup, include=FALSE}
+# Desarrollo:
+```{r setup, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Carga de paquetes y lectura de datos:
+## Carga de paquetes y lectura de datos:
 
 ```{r carga de paquetes, message=FALSE}
 ### Carga de paquetes:
@@ -28,6 +28,7 @@ library(plotly)
 library(DT)
 library(readr)
 library(readxl)
+library(lubridate)
 ```
 
 ```{r lectura-datos, message=FALSE}
@@ -35,7 +36,7 @@ Est_pol <-
 read_xls("estadisticaspoliciales2021.xls") 
 ```
 
-# Tabla
+### Tabla 1. DT interactiva de las estadísticas policiales del (OIJ):
 
 ```{r tabla, message=FALSE}
 Est_pol %>%
@@ -51,9 +52,9 @@ Est_pol %>%
   ), options = list(pageLength = 5, language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')))
 ```
 
-# Gráfico 1:
+### Gráfico 1. Gráfico de la cantidad de delitos por tipo de delito registrados por el (OIJ) en el 2021:
 
-```{r gráfico-1}
+```{r gráfico-1, message=FALSE}
 # Gráfico de la cantidad de delitos por tipo de delito:
 
 Delitos <-
@@ -67,6 +68,24 @@ ggtitle("Cantidad de delitos por tipo de delito") +
   ylab("Cantidad de delitos") + 
   theme_minimal()
 ggplotly(Delitos) %>% 
+  config(locale = 'es')
+```
+### Grafico 2. Muestra interactivamente la cantidad de delitos por mes registrados por el (OIJ) en el 2021:
+
+```{r Grafico-2, message=FALSE}
+Del_mes <- Est_pol %>%
+  dplyr::select(Fecha, Delito, Hora)
+```
+```{r Grafico-2.0, message=FALSE}
+graph2 <- 
+Del_mes %>% mutate(mes = month(Fecha, label = FALSE)) %>%
+  ggplot() +
+  geom_bar(aes(x = mes), fill = "navy", color = "gold") + 
+  ggtitle("Cantidad de delitos por mes") + 
+  xlab("Mes (1-11)") + 
+  ylab("Cantidad") + 
+  theme_minimal() 
+ggplotly(graph2) %>%
   config(locale = 'es')
 ```
 
