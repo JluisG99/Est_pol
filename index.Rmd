@@ -2,29 +2,43 @@
 title: "Estadisticas del OIJ"
 author: "Jose Luis Gamboa Mora"
 date: '2022-06-18'
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r carga de paquetes, message=FALSE}
+### Carga de paquetes:
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(DT)
+library(readr)
+library(readxl)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r lectura-datos}
+Est_pol <-
+read_xls("estadisticaspoliciales2021.xls") 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# Tabla
+
+```{r tabla}
+Est_pol %>%
+  dplyr::select(Delito, Fecha, Victima, Edad, Genero, Provincia, Canton) %>%
+  datatable(colnames = c(
+    "Delito",
+    "Fecha",
+    "Víctima",
+    "Edad",
+    "Género",
+    "Provincia",
+    "Cantón"
+  ), options = list(pageLength = 5, language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')))
+```
+
