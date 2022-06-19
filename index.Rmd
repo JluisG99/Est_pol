@@ -10,7 +10,7 @@ output:
 ### GF-0604 Procesamiento de datos geográficos
 ### Profesor: Manuel Vargas del Valle
 # Introducción:
-#### Este informe tiene como finalidad demostrar la utilidad de utilizar datos y realizar diferentes estadísticos con ellos como **tablas** y **gráficos** con diferentes paquetes de R. Estos paquetes se encuentran especificados en la sección de carga de paquetes y lectura de datos. Además, es importante señalar que este página web cuenta con una serie de _botones_ "code", que permiten al lector observar el código utilizado para generar cada uno de los productos.
+#### Este informe tiene como finalidad demostrar la utilidad de utilizar datos y realizar diferentes estadísticos con ellos como **tablas** y **gráficos** con diferentes paquetes de R. Estos paquetes se encuentran especificados en la sección de carga de paquetes y lectura de datos. Además, es importante señalar que esta página web cuenta con una serie de _botones_ "code", que permiten al lector observar el código utilizado para generar cada uno de los productos.
 
 # Desarrollo:
 ```{r setup, message=FALSE}
@@ -23,11 +23,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Carga de paquetes:
 library(dplyr)
 library(ggplot2)
+library(ggthemes)
 library(plotly)
 library(DT)
 library(readr)
 library(readxl)
 library(lubridate)
+library(tidyverse)
 ```
 
 ```{r lectura-datos, message=FALSE}
@@ -86,5 +88,29 @@ Del_mes %>% mutate(mes = month(Fecha, label = FALSE)) %>%
   theme_minimal() 
 ggplotly(graph2) %>%
   config(locale = 'es')
+```
+##### Nota: Los datos utilizados para generar el gráfico 2, cuenta con datos únicamente de Enero a Noviembre del mes 1 al 11. 
+
+
+### Gráfico 3. Barras apiladas: Muestra la proporción de delitos por género registrados por el (OIJ) en el 2021: 
+
+```{r definir variables a utilizar, message=FALSE}
+Propor_gen <- Est_pol %>%
+  dplyr::select(Delito, Genero)
+```
+```{r grafico de barras apiladas, message=FALSE}
+# ggplotly - Gráfico de barras apiladas de proporciones
+
+Apiladas_propor_genero <-
+  Propor_gen %>%
+  ggplot(aes(x = Genero, fill = Delito)) + 
+  geom_bar(position = "fill") +
+  ggtitle("Proporción de la ocurrencia de delitos por género") +
+  xlab("Delito") +
+  ylab("Proporción") +
+  labs(fill = "Delito") +
+  theme_minimal()
+
+ggplotly(Apiladas_propor_genero) %>% config(locale = 'es')
 ```
 
