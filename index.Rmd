@@ -1,15 +1,24 @@
 ---
-title: "Estadisticas del OIJ"
+title: "Estadisticas del OIJ en R"
+University: "Universidad de Costa Rica, escuela de Geografía"
+Course: "GF-0604 Procesamiento de datos geográficos"
+Professor: "Manuel Vargas del Valle"
 author: "Jose Luis Gamboa Mora"
 date: '2022-06-18'
 output: 
   html_document:
     code_folding: hide
 ---
+# Introducción:
+### Este informe tiene como finalidad demostrar la utilidad de utilizar datos
+### y realizar diferentes estadísticos con ellos como **gráficos** con el   paquete DT de R.
 
+### Desarrollo:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# Carga de paquetes y lectura de datos:
 
 ```{r carga de paquetes, message=FALSE}
 ### Carga de paquetes:
@@ -21,14 +30,14 @@ library(readr)
 library(readxl)
 ```
 
-```{r lectura-datos}
+```{r lectura-datos, message=FALSE}
 Est_pol <-
 read_xls("estadisticaspoliciales2021.xls") 
 ```
 
 # Tabla
 
-```{r tabla}
+```{r tabla, message=FALSE}
 Est_pol %>%
   dplyr::select(Delito, Fecha, Victima, Edad, Genero, Provincia, Canton) %>%
   datatable(colnames = c(
@@ -40,5 +49,24 @@ Est_pol %>%
     "Provincia",
     "Cantón"
   ), options = list(pageLength = 5, language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')))
+```
+
+# Gráfico 1:
+
+```{r gráfico-1}
+# Gráfico de la cantidad de delitos por tipo de delito:
+
+Delitos <-
+Est_pol %>%
+  count(Delito) %>%
+  ggplot(aes(x = reorder(Delito, n), y = n)) + 
+  geom_bar(stat = "identity") +
+coord_flip() +
+ggtitle("Cantidad de delitos por tipo de delito") + 
+  xlab("Tipo de delito") + 
+  ylab("Cantidad de delitos") + 
+  theme_minimal()
+ggplotly(Delitos) %>% 
+  config(locale = 'es')
 ```
 
