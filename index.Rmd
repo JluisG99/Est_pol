@@ -1,6 +1,6 @@
 ---
-title: "Estadisticas del OIJ en R"
-author: "Jose Luis Gamboa Mora"
+title: "Generación de tablas y gráficos con estadísticas del (OIJ) en R"
+author: "Jose Luis Gamboa Mora | B78769"
 date: '2022-06-18'
 output: 
   html_document:
@@ -10,8 +10,7 @@ output:
 ### GF-0604 Procesamiento de datos geográficos
 ### Profesor: Manuel Vargas del Valle
 # Introducción:
-#### Este informe tiene como finalidad demostrar la utilidad de utilizar datos
-#### y realizar diferentes estadísticos con ellos como **tablas** y **gráficos** con diferentes paquetes de R. Estos paquetes se encuentran especificados en la sección de carga de paquetes y lectura de datos. Además, es importante señalar que este página web cuenta con una serie de _botones_ "code", que permiten al lector observar el código utilizado para generar cada uno de los productos.
+#### Este informe tiene como finalidad demostrar la utilidad de utilizar datos y realizar diferentes estadísticos con ellos como **tablas** y **gráficos** con diferentes paquetes de R. Estos paquetes se encuentran especificados en la sección de carga de paquetes y lectura de datos. Además, es importante señalar que este página web cuenta con una serie de _botones_ "code", que permiten al lector observar el código utilizado para generar cada uno de los productos.
 
 # Desarrollo:
 ```{r setup, message=FALSE}
