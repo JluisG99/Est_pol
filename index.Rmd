@@ -1,14 +1,14 @@
 ---
 title: "Estadisticas del OIJ en R"
-University: "Universidad de Costa Rica, escuela de Geografía"
-Course: "GF-0604 Procesamiento de datos geográficos"
-Professor: "Manuel Vargas del Valle"
 author: "Jose Luis Gamboa Mora"
 date: '2022-06-18'
 output: 
   html_document:
     code_folding: hide
 ---
+### Universidad de Costa Rica, escuela de Geografía
+### GF-0604 Procesamiento de datos geográficos
+### Profesor: Manuel Vargas del Valle
 # Introducción:
 ### Este informe tiene como finalidad demostrar la utilidad de utilizar datos
 ### y realizar diferentes estadísticos con ellos como **gráficos** con el   paquete DT de R.
