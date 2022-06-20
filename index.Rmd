@@ -106,7 +106,7 @@ Apiladas_propor_genero <-
   ggplot(aes(x = Genero, fill = Delito)) + 
   geom_bar(position = "fill") +
   ggtitle("Proporción de la ocurrencia de delitos por género") +
-  xlab("Delito") +
+  xlab("Genero") +
   ylab("Proporción") +
   labs(fill = "Delito") +
   theme_minimal()
@@ -114,3 +114,33 @@ Apiladas_propor_genero <-
 ggplotly(Apiladas_propor_genero) %>% config(locale = 'es')
 ```
 
+### Gráfico 4. Cantidad de delitos para los cantones de San José, Alajuela, Cartago y Heredia registrados por el (OIJ) en el 2021:
+
+```{r selección de variable a utilizar, message=FALSE}
+Delitos_Cantonal <- Est_pol %>%
+  dplyr::select(Canton)
+```
+```{r filtrado, message=FALSE}
+Delis_Canto <- 
+  filter(Delitos_Cantonal, grepl('HEREDIA|ALAJUELA|CARTAGO|SAN JOSE', Canton))
+```
+```{r gráfico delitos cantones, message=FALSE}
+Graph_cantones_ASHC <-
+Delis_Canto %>% 
+  count(Canton) %>%
+  ggplot(aes(x = reorder(Canton, n), y = n)) + 
+  geom_bar(stat = "identity") + 
+ggtitle("Delitos cometidos en los cantones de San José, Alajuela, Cartago y Heredia") + 
+  xlab("Cantón") + 
+  ylab("Cantidad de delitos") + 
+  theme_minimal()
+ggplotly(Graph_cantones_ASHC) %>% 
+  config(locale = 'es')
+```
+
+# Conclusiones:
+#### Utilizar las herramientas del tidyverse son de gran utilidad porque cuentan con una gran cantidad de características que permiten al usuario manejar bases de datos, generar tablas y diferentes tipos de gráficos. 
+
+#### Ggplot2 ha demostrado ser un paquete con una gran versatilidad, y es considerado de gran utilidad para el análisis estadístico de los datos.Del mismo modo, este paquete permite generar productos con visualizaciones que atraen a los lectores e incluso interactivas que permiten al usuario interactuar y consultar diferentes tipos de información dentro del producto generado, como las que permite generar el plotly de ggplot.
+
+#### Utilizar metodologías similares a las empleadas en este reporte, permite que el geógrafo se perfile como un profesional capaz de analizar datos mediante un lenguaje de programación como R que agiliza los procesos y además brinda más herramientas de calidad para el quehacer científico. 
