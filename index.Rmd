@@ -130,7 +130,7 @@ Delis_Canto %>%
   count(Canton) %>%
   ggplot(aes(x = reorder(Canton, n), y = n)) + 
   geom_bar(stat = "identity") + 
-ggtitle("Delitos cometidos en los cantones de San José, Alajuela, Cartago y Heredia") + 
+ggtitle("Delitos en los cantones de San José, Alajuela, Cartago y Heredia") + 
   xlab("Cantón") + 
   ylab("Cantidad de delitos") + 
   theme_minimal()
