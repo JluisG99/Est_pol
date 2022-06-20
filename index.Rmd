@@ -1,5 +1,5 @@
 ---
-title: "Generación de tablas y gráficos con estadísticas del (OIJ) en R"
+title: "Generación de tablas y gráficos interactivos con estadísticas del (OIJ) en R"
 author: "Jose Luis Gamboa Mora | B78769"
 date: '2022-06-18'
 output: 
@@ -37,7 +37,7 @@ Est_pol <-
 read_xls("estadisticaspoliciales2021.xls") 
 ```
 
-### Tabla 1. DT interactiva de las estadísticas policiales del (OIJ):
+### Tabla 1. DT interactiva de las estadísticas policiales registradas por el (OIJ) en el 2021:
 
 ```{r tabla, message=FALSE}
 Est_pol %>%
@@ -53,7 +53,7 @@ Est_pol %>%
   ), options = list(pageLength = 5, language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')))
 ```
 
-### Gráfico 1. Gráfico de la cantidad de delitos por tipo de delito registrados por el (OIJ) en el 2021:
+### Gráfico 1. Cantidad de delitos por tipo de delito registrados por el (OIJ) en el 2021:
 
 ```{r gráfico-1, message=FALSE}
 # Gráfico de la cantidad de delitos por tipo de delito:
@@ -71,7 +71,7 @@ ggtitle("Cantidad de delitos por tipo de delito") +
 ggplotly(Delitos) %>% 
   config(locale = 'es')
 ```
-### Grafico 2. Muestra interactivamente la cantidad de delitos por mes registrados por el (OIJ) en el 2021:
+### Gráfico 2. Muestra interactivamente la cantidad de delitos por mes registrados por el (OIJ) en el 2021:
 
 ```{r Grafico-2, message=FALSE}
 Del_mes <- Est_pol %>%
@@ -106,7 +106,7 @@ Apiladas_propor_genero <-
   ggplot(aes(x = Genero, fill = Delito)) + 
   geom_bar(position = "fill") +
   ggtitle("Proporción de la ocurrencia de delitos por género") +
-  xlab("Genero") +
+  xlab("Género") +
   ylab("Proporción") +
   labs(fill = "Delito") +
   theme_minimal()
@@ -114,7 +114,7 @@ Apiladas_propor_genero <-
 ggplotly(Apiladas_propor_genero) %>% config(locale = 'es')
 ```
 
-### Gráfico 4. Cantidad de delitos para los cantones de San José, Alajuela, Cartago y Heredia registrados por el (OIJ) en el 2021:
+### Gráfico 4. Cantidad de delitos en los cantones de; San José, Alajuela, Cartago y Heredia, registrados por el (OIJ) en el 2021:
 
 ```{r selección de variable a utilizar, message=FALSE}
 Delitos_Cantonal <- Est_pol %>%
